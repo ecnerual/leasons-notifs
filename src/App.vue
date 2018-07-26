@@ -5,9 +5,37 @@
       <router-link to="/about">About</router-link> |
       <router-link to="/Bob27">Bob27</router-link>
     </div>
+    <Notification v-bind:key="notif.id" v-for="notif in notifs" :notif="notif"/>  
     <router-view/>
   </div>
 </template>
+
+
+<script>
+import Notification from '@/components/Notif.vue';
+import { mapActions, mapState } from 'vuex';
+
+export default {
+  components: {
+    Notification
+  },
+  created: function () {
+    console.log('bon matin m8!');
+    this.addNotification('welcome m8');
+  }, 
+  computed: {
+    ...mapState('notifications', {
+      notifs: state => state.notifs
+    })
+  },
+  methods: {
+    ...mapActions({
+      addNotification: 'notifications/add'
+    })
+  }
+}
+</script>
+
 
 <style lang="scss">
 #app {

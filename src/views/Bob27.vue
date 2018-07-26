@@ -1,6 +1,6 @@
 <template>
   <div>
-    <KeyPad value='1' text='1' v-on:click="console.log(1)" />
+    <KeyPad value='Bonjour Madame!' text='madame' />
   </div>
 </template>
 

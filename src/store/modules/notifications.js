@@ -1,7 +1,8 @@
-import notification from '@/entities/notification.js';
+import Notification from '@/entities/notification.js';
 
 const state = {
   loading: false,
+  notifId: 1,
   notifs: []
 };
 
@@ -14,18 +15,22 @@ const mutations = {
     state.loading = false;
   },
 
-  add (state, notif) {
-    state.notifs.push(notif);
+  add (state, notifText) {
+    state.notifs.push(new Notification({ id: state.notifId++, text: notifText }));
   },
 
-  delete (state, notif) {
-    state.notifs = state.notifs.filter(n => n.id !== notif.id);
+  delete (state, idToRemove) {
+    state.notifs = state.notifs.filter(n => n.id !== idToRemove);
   }
 };
 
 const actions = {
-  add ({ commit, state }, notif) {
-    state.commit('add', new notification(notif));
+  add ({ commit, state }, notifText) {
+    commit('add', notifText);
+  },
+
+  delete ({ commit, state}, id) {
+    commit('delete', id)
   }
 };
 
